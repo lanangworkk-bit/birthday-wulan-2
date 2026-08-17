@@ -1194,6 +1194,437 @@
         }
         .egg-close:hover { background: var(--white); color: var(--pink); }
 
+        /* ── Scroll to Top ── */
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--pink);
+            color: var(--white);
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 90;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(232,135,155,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .scroll-top.show { opacity: 1; transform: translateY(0); }
+        .scroll-top:hover { background: #d47088; transform: translateY(-2px); }
+
+        /* ── Sparkle Cursor ── */
+        .sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            font-size: 10px;
+            animation: sparkleFade 0.8s ease forwards;
+        }
+        @keyframes sparkleFade {
+            0% { opacity: 1; transform: scale(1) translateY(0); }
+            100% { opacity: 0; transform: scale(0.3) translateY(-20px); }
+        }
+
+        /* ── Crown ── */
+        .crown {
+            display: inline-block;
+            font-size: 1.2rem;
+            animation: crownBounce 2s ease infinite;
+            margin-right: 4px;
+        }
+        @keyframes crownBounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-3px) rotate(-5deg); }
+            75% { transform: translateY(-3px) rotate(5deg); }
+        }
+
+        /* ── Love Clock ── */
+        .clock-section { text-align: center; margin: 24px 0; }
+        .clock-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: var(--pink);
+            margin-bottom: 8px;
+        }
+        .clock-time {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .clock-date {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        /* ── Gift Box ── */
+        .gift-section { text-align: center; margin: 30px 0; }
+        .gift-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .gift-box {
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .gift-box:hover { transform: scale(1.05); }
+        .gift-icon { font-size: 4rem; transition: all 0.5s; }
+        .gift-box.opened .gift-icon { transform: scale(1.2) rotate(10deg); }
+        .gift-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-top: 12px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease 0.3s;
+        }
+        .gift-box.opened + .gift-message {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Love Lock ── */
+        .lock-section { text-align: center; margin: 24px 0; }
+        .lock-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .lock-icon {
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.5s;
+            display: inline-block;
+        }
+        .lock-icon.locked { filter: none; }
+        .lock-icon.unlocked { filter: grayscale(0.3); transform: rotate(-15deg); }
+        .lock-text {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 8px;
+            transition: all 0.3s;
+        }
+
+        /* ── Photo Filters ── */
+        .filter-section { text-align: center; margin: 20px 0; }
+        .filter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: var(--pink);
+            margin-bottom: 12px;
+        }
+        .filter-btns {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 6px 16px;
+            border: 1.5px solid var(--pink-light);
+            background: var(--white);
+            color: var(--text);
+            border-radius: 50px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--pink);
+            color: var(--white);
+            border-color: var(--pink);
+        }
+        .photo-card.filtered-normal img { filter: none; }
+        .photo-card.filtered-sepia img { filter: sepia(0.7); }
+        .photo-card.filtered-bw img { filter: grayscale(1); }
+        .photo-card.filtered-vintage img { filter: sepia(0.3) saturate(1.4) contrast(1.1); }
+        .photo-card.filtered-warm img { filter: saturate(1.3) brightness(1.05); }
+
+        /* ── Love Compass ── */
+        .compass-section { text-align: center; margin: 24px 0; }
+        .compass-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: var(--pink);
+            margin-bottom: 10px;
+        }
+        .compass {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--pink);
+            background: var(--white);
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 4px 16px rgba(232,135,155,0.15);
+        }
+        .compass-needle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 3px;
+            height: 40px;
+            background: linear-gradient(var(--pink), var(--gold));
+            transform-origin: bottom center;
+            transform: translate(-50%, -100%) rotate(0deg);
+            border-radius: 2px;
+            animation: compassSpin 3s ease-in-out infinite;
+        }
+        @keyframes compassSpin {
+            0%, 100% { transform: translate(-50%, -100%) rotate(0deg); }
+            25% { transform: translate(-50%, -100%) rotate(45deg); }
+            50% { transform: translate(-50%, -100%) rotate(0deg); }
+            75% { transform: translate(-50%, -100%) rotate(-20deg); }
+        }
+        .compass-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+        .compass-label {
+            position: absolute;
+            top: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: var(--pink);
+            font-weight: 600;
+        }
+        .compass-bottom {
+            position: absolute;
+            bottom: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ── Wax Seal ── */
+        .seal-section { text-align: center; margin: 24px 0; }
+        .seal-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .seal-letter {
+            max-width: 360px;
+            margin: 0 auto;
+            background: var(--white);
+            border: 1px solid var(--pink-light);
+            border-radius: 12px;
+            padding: 24px;
+            position: relative;
+        }
+        .seal-letter p {
+            font-size: 0.88rem;
+            color: var(--text);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .seal-stamp {
+            position: absolute;
+            bottom: -18px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c0392b, #e74c3c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(192,57,43,0.3);
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .seal-stamp:hover { transform: scale(1.1) rotate(-5deg); }
+
+        /* ── Birthday Banner ── */
+        .banner {
+            text-align: center;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        .banner-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            background: linear-gradient(90deg, var(--pink), var(--gold), var(--pink));
+            background-size: 200% 100%;
+            padding: 14px 30px;
+            border-radius: 12px;
+            display: inline-block;
+            animation: bannerShimmer 3s ease infinite;
+        }
+        @keyframes bannerShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* ── Photo Booth Frame ── */
+        .booth-section { text-align: center; margin: 30px 0; }
+        .booth-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .booth-frame {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            max-width: 360px;
+            margin: 0 auto;
+            padding: 12px;
+            background: var(--white);
+            border: 2px solid var(--pink-light);
+            border-radius: 12px;
+        }
+        .booth-frame img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        /* ── Love Counter ── */
+        .counter-section { text-align: center; margin: 24px 0; }
+        .counter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: var(--pink);
+            margin-bottom: 10px;
+        }
+        .counter-grid {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .counter-box {
+            background: var(--white);
+            border: 1px solid var(--pink-light);
+            border-radius: 10px;
+            padding: 10px 14px;
+            min-width: 60px;
+        }
+        .counter-num {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--pink);
+            display: block;
+        }
+        .counter-label {
+            font-size: 0.6rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── Photo Hover Zoom ── */
+        .zoom-photo {
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 400px;
+            margin: 20px auto;
+            border: 2px solid var(--pink-light);
+        }
+        .zoom-photo img {
+            width: 100%;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .zoom-photo:hover img { transform: scale(1.08); }
+
+        /* ── Daily Message ── */
+        .daily-section { text-align: center; margin: 24px 0; }
+        .daily-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .daily-card {
+            background: linear-gradient(135deg, var(--pink-light), #fff5f8);
+            border: 1px solid var(--pink-soft);
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 360px;
+            margin: 0 auto;
+        }
+        .daily-text {
+            font-size: 0.92rem;
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+        .daily-day {
+            font-size: 0.7rem;
+            color: var(--pink);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        /* ── Confetti Bottom ── */
+        .bottom-reached {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* ── Animated Dividers ── */
+        .divider-animated .line {
+            animation: lineGrow 2s ease infinite;
+        }
+        @keyframes lineGrow {
+            0%, 100% { width: 40px; }
+            50% { width: 80px; }
+        }
+
+        /* ── Sound Effects Toggle ── */
+        .sfx-toggle {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 90;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1.5px solid var(--pink-soft);
+            background: var(--white);
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(232,135,155,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .sfx-toggle:hover { background: var(--pink-light); }
+        .sfx-toggle.muted { opacity: 0.5; }
+
         /* ── Responsive ── */
         @media (max-width: 500px) {
             .opening h1 { font-size: 1.8rem; }
@@ -1459,6 +1890,128 @@
                 <button class="wishgen-btn" onclick="newWish()">Doa Lainnya</button>
             </div>
 
+            <div class="divider divider-animated"><div class="line"></div><span>&#128152;</span><div class="line"></div></div>
+
+            <!-- Birthday Banner -->
+            <div class="banner">
+                <div class="banner-text">&#127874; Happy 17th Birthday, Wulan! &#127874;</div>
+            </div>
+
+            <!-- Crown Name -->
+            <div style="text-align:center;margin:20px 0;">
+                <span class="crown">&#128081;</span>
+                <span style="font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--text);">Ni Komang Wulan Dariska Putri</span>
+            </div>
+
+            <!-- Love Clock -->
+            <div class="clock-section">
+                <div class="clock-title">Waktu Sekarang</div>
+                <div class="clock-time" id="loveClock">00:00:00</div>
+                <div class="clock-date" id="loveDate"></div>
+            </div>
+
+            <!-- Love Counter (Hari/Jam/Menit/Detik sejak pacaran) -->
+            <div class="counter-section">
+                <div class="counter-title">Cinta Kita Sudah Berjalan</div>
+                <div class="counter-grid">
+                    <div class="counter-box"><span class="counter-num" id="lc-days">0</span><span class="counter-label">Hari</span></div>
+                    <div class="counter-box"><span class="counter-num" id="lc-hours">0</span><span class="counter-label">Jam</span></div>
+                    <div class="counter-box"><span class="counter-num" id="lc-mins">0</span><span class="counter-label">Menit</span></div>
+                    <div class="counter-box"><span class="counter-num" id="lc-secs">0</span><span class="counter-label">Detik</span></div>
+                </div>
+            </div>
+
+            <!-- Wax Seal Letter -->
+            <div class="divider"><div class="line"></div><span>&#9993;</span><div class="line"></div></div>
+            <div class="seal-section">
+                <div class="seal-title">Surat Tertutup</div>
+                <div class="seal-letter">
+                    <p>Wulan sayang, setiap detik bersamamu adalah anugerah terindah. Terima kasih sudah menjadi alasan terbaik dalam hidupku. Aku berjanji akan selalu ada, menyayangimu, dan membuatmu bahagia selamanya. Aku sayang kamu lebih dari apapun. &#128152;</p>
+                    <div class="seal-stamp">&#128152;</div>
+                </div>
+            </div>
+
+            <!-- Love Lock -->
+            <div class="divider"><div class="line"></div><span>&#128274;</span><div class="line"></div></div>
+            <div class="lock-section">
+                <div class="lock-title">Cinta Terkunci Selamanya</div>
+                <div class="lock-icon locked" id="loveLock" onclick="toggleLock()">&#128274;</div>
+                <div class="lock-text" id="lockText">Klik untuk mengunci cinta kita</div>
+            </div>
+
+            <!-- Gift Box -->
+            <div class="divider"><div class="line"></div><span>&#127873;</span><div class="line"></div></div>
+            <div class="gift-section">
+                <div class="gift-title">Hadiah Untukmu</div>
+                <div class="gift-box" id="giftBox" onclick="openGift()">
+                    <div class="gift-icon">&#127873;</div>
+                </div>
+                <div class="gift-message" id="giftMsg">&#10024; Kamu adalah hadiah terindah dalam hidupku! &#10024;</div>
+            </div>
+
+            <!-- Photo Filters -->
+            <div class="divider"><div class="line"></div><span>&#128247;</span><div class="line"></div></div>
+            <div class="filter-section">
+                <div class="filter-title">Filter Foto</div>
+                <div class="filter-btns">
+                    <button class="filter-btn active" onclick="setFilter('normal',this)">Normal</button>
+                    <button class="filter-btn" onclick="setFilter('sepia',this)">Sepia</button>
+                    <button class="filter-btn" onclick="setFilter('bw',this)">B&W</button>
+                    <button class="filter-btn" onclick="setFilter('vintage',this)">Vintage</button>
+                    <button class="filter-btn" onclick="setFilter('warm',this)">Warm</button>
+                </div>
+            </div>
+
+            <!-- Photo Booth -->
+            <div class="booth-section">
+                <div class="booth-title">Photo Booth</div>
+                <div class="booth-frame">
+                    <img src="download.png" alt="Photo">
+                    <img src="download-1.png" alt="Photo">
+                    <img src="download-2.png" alt="Photo">
+                    <img src="nailong.jpg" alt="Nailong">
+                </div>
+            </div>
+
+            <!-- Zoom Photo -->
+            <div class="divider"><div class="line"></div><span>&#128248;</span><div class="line"></div></div>
+            <div class="zoom-photo">
+                <img src="download.png" alt="Zoom Photo">
+            </div>
+
+            <!-- Love Compass -->
+            <div class="divider"><div class="line"></div><span>&#129517;</span><div class="line"></div></div>
+            <div class="compass-section">
+                <div class="compass-title">Kompas Cinta</div>
+                <div class="compass">
+                    <div class="compass-label">&#128152;</div>
+                    <div class="compass-needle"></div>
+                    <div class="compass-center">&#128152;</div>
+                    <div class="compass-bottom">&#128152;</div>
+                </div>
+            </div>
+
+            <!-- Daily Message -->
+            <div class="divider"><div class="line"></div><span>&#128140;</span><div class="line"></div></div>
+            <div class="daily-section">
+                <div class="daily-title">Pesan Hari Ini</div>
+                <div class="daily-card">
+                    <div class="daily-text" id="dailyMsg">Hari ini dan setiap hari, kamu selalu di hatiku.</div>
+                    <div class="daily-day" id="dailyDay"></div>
+                </div>
+            </div>
+
+            <!-- Love Calculator -->
+            <div class="divider"><div class="line"></div><span>&#127922;</span><div class="line"></div></div>
+            <div class="meter-section">
+                <div class="meter-title">Kecocokan Kita</div>
+                <div class="meter-bar" onclick="fillMatch()">
+                    <div class="meter-fill" id="matchFill"><span id="matchPct">0%</span></div>
+                </div>
+                <div class="meter-hint">Klik untuk menghitung</div>
+                <div class="meter-result" id="matchResult">100% Soulmates! &#128149;</div>
+            </div>
+
             <div class="divider"><div class="line"></div><span>&#128152;</span><div class="line"></div></div>
 
             <div class="signature">
@@ -1467,8 +2020,13 @@
                 <small>Selamat Ulang Tahun ke-17, Wulan!</small>
             </div>
 
+            <div class="bottom-reached" id="bottomMsg">&#128152; Kamu sudah membaca semuanya! &#128152;</div>
+
         </div>
     </div>
+
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#9650;</button>
+    <button class="sfx-toggle" id="sfxBtn" onclick="toggleSfx()">&#128264;</button>
 
     <!-- Easter Egg -->
     <div class="egg-overlay" id="eggOverlay">
@@ -1835,6 +2393,159 @@
                 clickCount = 0;
                 document.getElementById('eggOverlay').classList.add('active');
                 launchFireworks();
+            }
+        });
+
+        // ── 11. Scroll to Top ──
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTop');
+            if (window.scrollY > 400) btn.classList.add('show');
+            else btn.classList.remove('show');
+        });
+
+        // ── 12. Sparkle Cursor ──
+        const sparkleChars = ['&#10022;','&#10023;','&#10024;','&#10047;','&#128152;'];
+        let sparkleThrottle = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - sparkleThrottle < 80) return;
+            sparkleThrottle = now;
+            const s = document.createElement('div');
+            s.className = 'sparkle';
+            s.innerHTML = sparkleChars[Math.floor(Math.random()*sparkleChars.length)];
+            s.style.left = (e.clientX + (Math.random()-0.5)*20) + 'px';
+            s.style.top = (e.clientY + (Math.random()-0.5)*20) + 'px';
+            s.style.fontSize = (Math.random()*6+8) + 'px';
+            document.body.appendChild(s);
+            setTimeout(()=>s.remove(), 800);
+        });
+
+        // ── 13. Love Clock ──
+        function updateClock() {
+            const now = new Date();
+            const h = now.getHours().toString().padStart(2,'0');
+            const m = now.getMinutes().toString().padStart(2,'0');
+            const s = now.getSeconds().toString().padStart(2,'0');
+            document.getElementById('loveClock').textContent = h+':'+m+':'+s;
+            const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+            const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            document.getElementById('loveDate').textContent = days[now.getDay()]+', '+now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // ── 14. Love Counter (Real-time) ──
+        const loveStart = new Date(2026, 1, 14, 0, 0, 0);
+        function updateLoveCounter() {
+            const now = new Date();
+            const diff = Math.floor((now - loveStart) / 1000);
+            const days = Math.floor(diff / 86400);
+            const hours = Math.floor((diff % 86400) / 3600);
+            const mins = Math.floor((diff % 3600) / 60);
+            const secs = diff % 60;
+            document.getElementById('lc-days').textContent = days;
+            document.getElementById('lc-hours').textContent = hours;
+            document.getElementById('lc-mins').textContent = mins;
+            document.getElementById('lc-secs').textContent = secs;
+        }
+        updateLoveCounter();
+        setInterval(updateLoveCounter, 1000);
+
+        // ── 15. Love Lock ──
+        let locked = true;
+        function toggleLock() {
+            locked = !locked;
+            const icon = document.getElementById('loveLock');
+            const text = document.getElementById('lockText');
+            if (locked) {
+                icon.className = 'lock-icon locked';
+                icon.innerHTML = '&#128274;';
+                text.textContent = 'Cinta kita terkunci selamanya';
+            } else {
+                icon.className = 'lock-icon unlocked';
+                icon.innerHTML = '&#128275;';
+                text.textContent = 'Cinta kita terbuka untuk selamanya';
+            }
+        }
+
+        // ── 16. Gift Box ──
+        function openGift() {
+            const box = document.getElementById('giftBox');
+            box.classList.toggle('opened');
+        }
+
+        // ── 17. Photo Filters ──
+        function setFilter(type, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.photo-card').forEach(card => {
+                card.className = 'photo-card filtered-' + type;
+            });
+        }
+
+        // ── 18. Daily Message ──
+        const dailyMsgs = [
+            'Hari ini dan setiap hari, kamu selalu di hatiku.',
+            'Senyummu adalah cahaya yang menerangi hari-hariku.',
+            'Aku bersyukur memiliki kamu dalam hidupku.',
+            'Kamu adalah alasan aku tersenyum hari ini.',
+            'Setiap hari bersamamu adalah petualangan indah.',
+            'Cintamu membuatku menjadi versi terbaik dari diriku.',
+            'Kamu adalah rumahtempat aku pulang.',
+            'Aku mencintaimu lebih dari kemarin, kurang dari besok.'
+        ];
+        function updateDaily() {
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(),0,0)) / 864e5);
+            document.getElementById('dailyMsg').textContent = dailyMsgs[dayOfYear % dailyMsgs.length];
+            const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+            document.getElementById('dailyDay').textContent = days[today.getDay()]+', '+today.getDate()+' '+['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'][today.getMonth()]+' '+today.getFullYear();
+        }
+        updateDaily();
+
+        // ── 19. Love Calculator ──
+        let matchDone = false;
+        function fillMatch() {
+            if (matchDone) return;
+            matchDone = true;
+            const fill = document.getElementById('matchFill');
+            fill.style.width = '100%';
+            document.getElementById('matchPct').textContent = '100%';
+            setTimeout(() => {
+                document.getElementById('matchResult').classList.add('show');
+            }, 2000);
+        }
+
+        // ── 20. Sound Effects ──
+        let sfxOn = true;
+        function toggleSfx() {
+            sfxOn = !sfxOn;
+            document.getElementById('sfxBtn').classList.toggle('muted', !sfxOn);
+            document.getElementById('sfxBtn').innerHTML = sfxOn ? '&#128264;' : '&#128263;';
+        }
+        function playSfx(freq, dur) {
+            if (!sfxOn) return;
+            try {
+                const ctx = new (window.AudioContext||window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.frequency.value = freq;
+                gain.gain.value = 0.1;
+                osc.start();
+                setTimeout(()=>{osc.stop();ctx.close();}, dur);
+            } catch(e){}
+        }
+
+        // ── 21. Confetti on Bottom ──
+        let bottomShown = false;
+        window.addEventListener('scroll', () => {
+            if (bottomShown) return;
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 100) {
+                bottomShown = true;
+                launchFireworks();
+                document.getElementById('bottomMsg').innerHTML = '&#127881; &#128152; Kamu sudah membaca semuanya! &#128152; &#127881;';
             }
         });
     </script>
