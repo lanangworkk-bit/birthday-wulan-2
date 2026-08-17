@@ -578,76 +578,83 @@
             z-index: 60;
         }
 
-        /* ── Scratch Card ── */
-        .scratch-section { text-align: center; margin: 30px 0; }
-        .scratch-title {
+        /* ── Tap Card ── */
+        .tap-section { text-align: center; margin: 30px 0; }
+        .tap-title {
             font-family: 'Dancing Script', cursive;
             font-size: 1.4rem;
             color: var(--pink);
             margin-bottom: 14px;
         }
-        .scratch-wrap {
+        .tap-card {
             position: relative;
-            width: 320px;
-            height: 180px;
+            width: 300px;
+            height: 200px;
             margin: 0 auto;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 2px solid var(--pink-light);
-            cursor: crosshair;
-            touch-action: none;
+            perspective: 800px;
+            cursor: pointer;
         }
-        .scratch-hidden {
+        .tap-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .tap-card.opened .tap-inner {
+            transform: rotateY(180deg);
+        }
+        .tap-front, .tap-back {
             position: absolute;
             inset: 0;
+            backface-visibility: hidden;
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--gold-light), #fff5e6);
-            border-radius: 14px;
-            padding: 16px;
+            padding: 20px;
         }
-        .scratch-hidden .big {
+        .tap-front {
+            background: linear-gradient(135deg, var(--pink), #d47088);
+            border: 2px solid var(--pink);
+            color: var(--white);
+        }
+        .tap-front .icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: gentleBounce 2s ease infinite;
+        }
+        .tap-front .text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .tap-back {
+            background: linear-gradient(135deg, var(--gold-light), #fff8ee);
+            border: 2px solid var(--gold);
+            transform: rotateY(180deg);
+        }
+        .tap-back .big {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--gold);
+            margin-bottom: 6px;
         }
-        .scratch-hidden .small {
+        .tap-back .small {
             font-family: 'Dancing Script', cursive;
             font-size: 1rem;
             color: var(--text-light);
-            margin-top: 4px;
         }
-        .scratch-cover {
-            position: absolute;
-            inset: 0;
-            background: var(--pink);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: opacity 0.5s ease;
+        .tap-back .hearts {
+            margin-top: 10px;
+            font-size: 1.3rem;
         }
-        .scratch-cover.done { opacity: 0; pointer-events: none; }
-        .scratch-hint {
+        .tap-hint {
             font-size: 0.78rem;
             color: var(--text-light);
             margin-top: 10px;
-        }
-        #scratchCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 14px;
-            z-index: 3;
         }
 
         /* ── Music Player ── */
@@ -942,17 +949,22 @@
 
             <div class="divider"><div class="line"></div><span>&#127800;</span><div class="line"></div></div>
 
-            <div class="scratch-section">
-                <div class="scratch-title">Gosok untuk Membuka Pesan Rahasia</div>
-                <div class="scratch-wrap" id="scratchWrap">
-                    <div class="scratch-hidden">
-                        <div class="big">Aku Sayang Kamu!</div>
-                        <div class="small">Setiap hari, setiap waktu, selamanya.</div>
+            <div class="tap-section">
+                <div class="tap-title">Kartu Pesan Rahasia</div>
+                <div class="tap-card" id="tapCard" onclick="openTapCard()">
+                    <div class="tap-inner">
+                        <div class="tap-front">
+                            <div class="icon">&#128151;</div>
+                            <div class="text">Ketuk untuk membuka</div>
+                        </div>
+                        <div class="tap-back">
+                            <div class="big">Aku Sayang Kamu!</div>
+                            <div class="small">Setiap hari, setiap waktu, selamanya.</div>
+                            <div class="hearts">&#128152; &#128147; &#128152;</div>
+                        </div>
                     </div>
-                    <canvas id="scratchCanvas"></canvas>
-                    <div class="scratch-cover" id="scratchCover">Gosok di sini &#128073;</div>
                 </div>
-                <div class="scratch-hint">Gosok area pink untuk mengungkap pesan</div>
+                <div class="tap-hint">Ketuk kartu untuk membuka pesan</div>
             </div>
 
             <div class="divider"><div class="line"></div><span>&#127916;</span><div class="line"></div></div>
@@ -1028,7 +1040,6 @@
             launchFireworks();
             setTimeout(typewriterEffect, 400);
             startPetals();
-            initScratch();
             initPlayer();
         }
 
@@ -1200,60 +1211,9 @@
             return m + ':' + (sec<10?'0':'') + sec;
         }
 
-        // ── Scratch Card ──
-        let scratching = false;
-        function initScratch() {
-            const canvas = document.getElementById('scratchCanvas');
-            if (!canvas) return;
-            const wrap = document.getElementById('scratchWrap');
-            const w = wrap.offsetWidth;
-            const h = wrap.offsetHeight;
-            canvas.width = w;
-            canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            ctx.fillStyle = '#e8879b';
-            ctx.fillRect(0, 0, w, h);
-
-            function getPos(e) {
-                const rect = canvas.getBoundingClientRect();
-                const clientX = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
-                const clientY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
-                return {
-                    x: (clientX - rect.left) * (canvas.width / rect.width),
-                    y: (clientY - rect.top) * (canvas.height / rect.height)
-                };
-            }
-
-            function draw(e) {
-                if (!scratching) return;
-                e.preventDefault();
-                const pos = getPos(e);
-                ctx.globalCompositeOperation = 'destination-out';
-                ctx.beginPath();
-                ctx.arc(pos.x, pos.y, 24, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            function endScratch() {
-                scratching = false;
-                const imgData = ctx.getImageData(0, 0, w, h);
-                let cleared = 0;
-                for (let i = 3; i < imgData.data.length; i += 4) {
-                    if (imgData.data[i] === 0) cleared++;
-                }
-                if (cleared / (w * h) > 0.35) {
-                    document.getElementById('scratchCover').classList.add('done');
-                    canvas.style.pointerEvents = 'none';
-                }
-            }
-
-            canvas.addEventListener('mousedown', (e) => { scratching = true; draw(e); });
-            canvas.addEventListener('mousemove', draw);
-            canvas.addEventListener('mouseup', endScratch);
-            canvas.addEventListener('mouseleave', endScratch);
-            canvas.addEventListener('touchstart', (e) => { scratching = true; draw(e); }, {passive:false});
-            canvas.addEventListener('touchmove', draw, {passive:false});
-            canvas.addEventListener('touchend', endScratch);
+        // ── Tap Card ──
+        function openTapCard() {
+            document.getElementById('tapCard').classList.toggle('opened');
         }
 
         // ── Flower Petals ──
