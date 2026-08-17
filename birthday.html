@@ -578,6 +578,221 @@
             z-index: 60;
         }
 
+        /* ── Scratch Card ── */
+        .scratch-section { text-align: center; margin: 30px 0; }
+        .scratch-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .scratch-wrap {
+            position: relative;
+            width: 320px;
+            height: 180px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--pink-light);
+            cursor: crosshair;
+        }
+        .scratch-hidden {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--gold-light), #fff5e6);
+            border-radius: 14px;
+            padding: 16px;
+        }
+        .scratch-hidden .big {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .scratch-hidden .small {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .scratch-cover {
+            position: absolute;
+            inset: 0;
+            background: var(--pink);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: opacity 0.5s ease;
+        }
+        .scratch-cover.done { opacity: 0; pointer-events: none; }
+        .scratch-hint {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 10px;
+        }
+
+        /* ── Music Player ── */
+        .player {
+            background: var(--white);
+            border: 1px solid var(--pink-light);
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin: 30px 0;
+            box-shadow: 0 2px 16px rgba(232,135,155,0.08);
+        }
+        .player-top {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 12px;
+        }
+        .player-art {
+            width: 52px;
+            height: 52px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--pink), var(--gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+        .player-info { flex: 1; min-width: 0; }
+        .player-title {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .player-artist {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        .player-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--pink);
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .player-btn:hover { background: #d47088; transform: scale(1.05); }
+        .player-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--pink-light);
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+        }
+        .player-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink), var(--gold));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.3s linear;
+        }
+        .player-time {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.65rem;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+
+        /* ── Timeline ── */
+        .timeline-section { margin: 30px 0; }
+        .timeline-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--pink);
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--pink), var(--gold), var(--pink-soft));
+        }
+        .tl-item {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 14px 18px;
+            background: var(--white);
+            border: 1px solid var(--pink-light);
+            border-radius: 12px;
+            transition: transform 0.3s;
+        }
+        .tl-item:hover { transform: translateX(4px); }
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 18px;
+            width: 10px;
+            height: 10px;
+            background: var(--pink);
+            border-radius: 50%;
+            border: 2px solid var(--white);
+            box-shadow: 0 0 0 2px var(--pink-light);
+        }
+        .tl-date {
+            font-size: 0.7rem;
+            color: var(--gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .tl-text {
+            font-size: 0.88rem;
+            color: var(--text);
+            margin-top: 4px;
+            font-weight: 300;
+        }
+
+        /* ── Flower Petals ── */
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.5;
+            animation: petalFall linear forwards;
+        }
+        @keyframes petalFall {
+            0% { transform: translateY(-40px) rotate(0deg) translateX(0); opacity: 0.6; }
+            25% { transform: translateY(25vh) rotate(90deg) translateX(30px); }
+            50% { transform: translateY(50vh) rotate(180deg) translateX(-20px); }
+            75% { transform: translateY(75vh) rotate(270deg) translateX(25px); }
+            100% { transform: translateY(105vh) rotate(360deg) translateX(-10px); opacity: 0; }
+        }
+
         /* ── Responsive ── */
         @media (max-width: 500px) {
             .opening h1 { font-size: 1.8rem; }
@@ -587,6 +802,10 @@
             .gallery-grid { gap: 8px; }
             .cd-box { min-width: 60px; padding: 10px 12px; }
             .cd-num { font-size: 1.4rem; }
+            .scratch-wrap { width: 280px; height: 160px; }
+            #scratchCanvas { width: 280px; height: 160px; }
+            .player { padding: 14px 16px; }
+            .tl-item { padding: 12px 14px; }
         }
     </style>
 </head>
@@ -669,6 +888,63 @@
                 </div>
             </div>
 
+            <div class="player">
+                <div class="player-top">
+                    <div class="player-art">&#127926;</div>
+                    <div class="player-info">
+                        <div class="player-title">Best Part</div>
+                        <div class="player-artist">Daniel Caesar ft. H.E.R.</div>
+                    </div>
+                    <button class="player-btn" id="playBtn" onclick="togglePlay()">&#9654;</button>
+                </div>
+                <div class="player-bar" onclick="seekAudio(event)">
+                    <div class="player-progress" id="progress"></div>
+                </div>
+                <div class="player-time">
+                    <span id="curTime">0:00</span>
+                    <span id="durTime">0:00</span>
+                </div>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#127801;</span><div class="line"></div></div>
+
+            <div class="timeline-section">
+                <div class="timeline-title">Perjalanan Cinta Kita</div>
+                <div class="timeline">
+                    <div class="tl-item">
+                        <div class="tl-date">Pertama Bertemu</div>
+                        <div class="tl-text">Hari pertama kita bertemu, dunia terasa berubah. Senyummu yang hangat membuatku jatuh hati.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-date">Menjadi Pacar</div>
+                        <div class="tl-text">Hari yang paling bahagia ketika kita resmi menjadi pasangan. Hatiku penuh.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-date">Momen Bersama</div>
+                        <div class="tl-text">Setiap waktu bersamamu adalah kenangan indah yang tak akan pernah aku lupakan.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-date">Hari Ini - 5 September 2026</div>
+                        <div class="tl-text">Sweet seventeen! Hari spesialmu. Aku bersyukur bisa merayakan ini bersamamu. Semoga kita selalu bersama.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#127800;</span><div class="line"></div></div>
+
+            <div class="scratch-section">
+                <div class="scratch-title">Gosok untuk Membuka Pesan Rahasia</div>
+                <div class="scratch-wrap" id="scratchWrap">
+                    <div class="scratch-hidden">
+                        <div class="big">Aku Sayang Kamu!</div>
+                        <div class="small">Setiap hari, setiap waktu, selamanya.</div>
+                    </div>
+                    <canvas id="scratchCanvas" width="320" height="180"></canvas>
+                    <div class="scratch-cover" id="scratchCover">Gosok di sini &#128073;</div>
+                </div>
+                <div class="scratch-hint">Gosok area pink untuk mengungkap pesan</div>
+            </div>
+
             <div class="divider"><div class="line"></div><span>&#127916;</span><div class="line"></div></div>
 
             <div class="video-title">Video Spesial Untukmu</div>
@@ -741,8 +1017,9 @@
             launchConfetti();
             launchFireworks();
             setTimeout(typewriterEffect, 400);
-            const m = document.getElementById('bgMusic');
-            m.play().catch(()=>{});
+            startPetals();
+            initScratch();
+            initPlayer();
         }
 
         // ── Typewriter ──
@@ -872,12 +1149,103 @@
         }
         document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
 
-        // ── Music Toggle ──
-        let playing=true;
-        function toggleMusic(){
-            const m=document.getElementById('bgMusic'),b=document.getElementById('musicBtn');
-            if(playing){m.pause();b.innerHTML='&#128263;';}else{m.play();b.innerHTML='&#9835;';}
-            playing=!playing;
+        // ── Music Toggle (compat) ──
+        let playing=false;
+        function toggleMusic(){ togglePlay(); }
+
+        // ── Custom Player ──
+        let audioReady = false;
+        function initPlayer() {
+            const a = document.getElementById('bgMusic');
+            a.addEventListener('loadedmetadata', ()=>{
+                document.getElementById('durTime').textContent = fmt(a.duration);
+                audioReady = true;
+            });
+            a.addEventListener('timeupdate', ()=>{
+                if (!audioReady) return;
+                const pct = (a.currentTime / a.duration) * 100;
+                document.getElementById('progress').style.width = pct + '%';
+                document.getElementById('curTime').textContent = fmt(a.currentTime);
+            });
+            a.addEventListener('ended', ()=>{
+                playing = false;
+                document.getElementById('playBtn').innerHTML = '&#9654;';
+            });
+        }
+        function togglePlay() {
+            const a = document.getElementById('bgMusic'), b = document.getElementById('playBtn');
+            if (playing) { a.pause(); b.innerHTML = '&#9654;'; }
+            else { a.play().catch(()=>{}); b.innerHTML = '&#10074;&#10074;'; }
+            playing = !playing;
+        }
+        function seekAudio(e) {
+            const a = document.getElementById('bgMusic');
+            if (!audioReady) return;
+            const w = e.currentTarget.getBoundingClientRect();
+            a.currentTime = ((e.clientX - w.left) / w.width) * a.duration;
+        }
+        function fmt(s) {
+            const m = Math.floor(s/60);
+            const sec = Math.floor(s%60);
+            return m + ':' + (sec<10?'0':'') + sec;
+        }
+
+        // ── Scratch Card ──
+        let scratching = false;
+        function initScratch() {
+            const canvas = document.getElementById('scratchCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#e8879b';
+            ctx.fillRect(0, 0, 320, 180);
+
+            const draw = (e) => {
+                if (!scratching) return;
+                const rect = canvas.getBoundingClientRect();
+                const x = (e.clientX || e.touches[0].clientX) - rect.left;
+                const y = (e.clientY || e.touches[0].clientY) - rect.top;
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.beginPath();
+                ctx.arc(x, y, 22, 0, Math.PI * 2);
+                ctx.fill();
+            };
+
+            canvas.addEventListener('mousedown', ()=>scratching=true);
+            canvas.addEventListener('mouseup', ()=>{scratching=false; checkScratch(canvas,ctx);});
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('touchstart', ()=>scratching=true);
+            canvas.addEventListener('touchend', ()=>{scratching=false; checkScratch(canvas,ctx);});
+            canvas.addEventListener('touchmove', (e)=>{e.preventDefault(); draw(e);});
+        }
+        function checkScratch(canvas, ctx) {
+            const imgData = ctx.getImageData(0, 0, 320, 180);
+            let cleared = 0;
+            for (let i = 3; i < imgData.data.length; i += 4) {
+                if (imgData.data[i] === 0) cleared++;
+            }
+            if (cleared / (320*180) > 0.4) {
+                document.getElementById('scratchCover').classList.add('done');
+                canvas.style.opacity = '0.3';
+            }
+        }
+
+        // ── Flower Petals ──
+        const petalShapes = ['&#127800;','&#127801;','&#127802;','&#127803;','&#127804;'];
+        let petalRunning = false;
+        function startPetals() {
+            petalRunning = true;
+            setInterval(() => {
+                if (!petalRunning) return;
+                const p = document.createElement('div');
+                p.className = 'petal';
+                p.innerHTML = petalShapes[Math.floor(Math.random()*petalShapes.length)];
+                p.style.left = Math.random()*100 + 'vw';
+                p.style.fontSize = (Math.random()*12+10) + 'px';
+                p.style.animationDuration = (Math.random()*5+6) + 's';
+                p.style.animationDelay = Math.random()*2 + 's';
+                document.body.appendChild(p);
+                setTimeout(()=>p.remove(), 14000);
+            }, 800);
         }
     </script>
 </body>
