@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesan Rahasia</title>
+    <title>Pesan Rahasia untuk Wulan</title>
+    <meta name="description" content="Surat cinta spesial untuk Ni Komang Wulan Dariska Putri - Happy 17th Birthday!">
+    <meta name="theme-color" content="#e8879b">
+    <meta property="og:title" content="Happy 17th Birthday, Wulan!">
+    <meta property="og:description" content="Surat cinta spesial untukmu. Buka untuk kejutan!">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="download.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Happy 17th Birthday, Wulan!">
+    <meta name="twitter:description" content="Surat cinta spesial untukmu.">
+    <meta name="twitter:image" content="download.png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128152;</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
     <style>
@@ -1626,6 +1637,58 @@
         .sfx-toggle.muted { opacity: 0.5; }
 
         /* ── Responsive ── */
+
+        /* ── Preloader ── */
+        .preloader {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #fff5f8, var(--pink-light), #fff);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+        .preloader.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .preloader-heart {
+            font-size: 3rem;
+            animation: preloaderPulse 1s ease infinite;
+        }
+        @keyframes preloaderPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+        .preloader-text {
+            margin-top: 12px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.1rem;
+            color: var(--pink);
+        }
+        .preloader-bar {
+            width: 120px;
+            height: 3px;
+            background: var(--pink-soft);
+            border-radius: 3px;
+            margin-top: 16px;
+            overflow: hidden;
+        }
+        .preloader-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--pink), var(--gold));
+            border-radius: 3px;
+            animation: preloaderFill 2s ease forwards;
+        }
+        @keyframes preloaderFill {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
         @media (max-width: 500px) {
             .opening h1 { font-size: 1.8rem; }
             .card-header .age { font-size: 4rem; }
@@ -1638,10 +1701,37 @@
             #scratchCanvas { width: 280px; height: 160px; }
             .player { padding: 14px 16px; }
             .tl-item { padding: 12px 14px; }
+            .banner-text { font-size: 1.1rem; padding: 10px 18px; }
+            .booth-frame { max-width: 280px; }
+            .seal-letter { padding: 16px; }
+            .counter-grid { gap: 6px; }
+            .counter-box { min-width: 55px; padding: 8px 10px; }
+            .counter-num { font-size: 1.1rem; }
+            .compass { width: 80px; height: 80px; }
+            .compass-needle { height: 32px; }
+            .clock-time { font-size: 1.5rem; }
+            .zoom-photo { margin: 14px 10px; }
+            .meter-section { padding: 16px; }
+            .meter-title { font-size: 1rem; }
+            .gift-icon { font-size: 3rem; }
+            .filter-btns { gap: 5px; }
+            .filter-btn { padding: 5px 12px; font-size: 0.7rem; }
+            .booth-frame { gap: 4px; padding: 8px; }
+            .scroll-top { bottom: 16px; right: 16px; width: 38px; height: 38px; }
+            .sfx-toggle { bottom: 16px; left: 16px; width: 36px; height: 36px; }
+            .daily-card { padding: 16px; margin: 0 10px; }
+            .seal-letter { margin: 0 10px; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-heart">&#128152;</div>
+        <div class="preloader-text">Memuat kejutan spesial...</div>
+        <div class="preloader-bar"><div class="preloader-bar-fill"></div></div>
+    </div>
 
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -2549,6 +2639,28 @@
                 launchFireworks();
                 document.getElementById('bottomMsg').innerHTML = '&#127881; &#128152; Kamu sudah membaca semuanya! &#128152; &#127881;';
             }
+        });
+
+        // ── 22. Preloader ──
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+            }, 2200);
+        });
+
+        // ── 23. Image Error Handler ──
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function() {
+                this.onerror = null;
+                this.style.display = 'flex';
+                this.style.alignItems = 'center';
+                this.style.justifyContent = 'center';
+                this.style.background = 'linear-gradient(135deg, var(--pink-light), #fff5f8)';
+                this.style.minHeight = '100px';
+                this.style.fontSize = '2rem';
+                this.alt = '';
+                this.src = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><text x="50%" y="55%" text-anchor="middle" font-size="40">&#128152;</text></svg>');
+            });
         });
     </script>
 </body>
