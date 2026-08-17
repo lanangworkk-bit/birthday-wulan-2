@@ -810,6 +810,390 @@
             100% { transform: translateY(105vh) rotate(360deg) translateX(-10px); opacity: 0; }
         }
 
+        /* ── Scroll Progress ── */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--pink), var(--gold));
+            z-index: 999;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* ── Night Mode Toggle ── */
+        .night-toggle {
+            position: fixed;
+            top: 16px;
+            left: 16px;
+            z-index: 100;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1.5px solid var(--pink-soft);
+            background: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(232,135,155,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        body.dark {
+            --off-white: #1a1520;
+            --white: #2a2030;
+            --text: #f0e8f0;
+            --text-light: #b8a8c0;
+            --pink-light: #3a2030;
+            --pink-soft: #6a4050;
+            background: var(--off-white);
+        }
+        body.dark .player, body.dark .message, body.dark .tl-item,
+        body.dark .cd-box, body.dark .wish {
+            background: var(--white);
+            border-color: var(--pink-light);
+        }
+
+        /* ── Envelope ── */
+        .envelope-section { text-align: center; margin: 30px 0; }
+        .envelope-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .envelope {
+            position: relative;
+            width: 280px;
+            height: 190px;
+            margin: 0 auto;
+            cursor: pointer;
+            perspective: 600px;
+        }
+        .envelope-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--pink), #d47088);
+            border-radius: 0 0 12px 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        .envelope-body::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.1));
+        }
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 95px;
+            background: linear-gradient(135deg, #d47088, var(--pink));
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 2;
+        }
+        .envelope.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+        .envelope-letter {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 240px;
+            background: var(--white);
+            border-radius: 8px;
+            padding: 20px 16px;
+            text-align: center;
+            z-index: 1;
+            transition: top 0.6s ease 0.3s, opacity 0.4s ease 0.3s;
+            opacity: 0;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        .envelope.open .envelope-letter {
+            top: -30px;
+            opacity: 1;
+        }
+        .envelope-letter p {
+            font-family: 'Dancing Script', cursive;
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .envelope-hint {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 12px;
+        }
+        .envelope.heart-seal {
+            display: inline-block;
+            position: relative;
+        }
+        .envelope.heart-seal::after {
+            content: '\\1F495';
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.8rem;
+            z-index: 5;
+            transition: opacity 0.3s;
+        }
+        .envelope.open.heart-seal::after { opacity: 0; }
+
+        /* ── Love Meter ── */
+        .meter-section { text-align: center; margin: 30px 0; }
+        .meter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .meter-bar {
+            width: 280px;
+            height: 18px;
+            background: var(--pink-light);
+            border-radius: 10px;
+            margin: 0 auto;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid var(--pink-soft);
+        }
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--pink), var(--gold));
+            border-radius: 10px;
+            transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+        }
+        .meter-fill span {
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--white);
+        }
+        .meter-result {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--pink);
+            margin-top: 12px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .meter-result.show { opacity: 1; }
+        .meter-hint {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-top: 6px;
+        }
+
+        /* ── Love Quotes ── */
+        .quotes-section { text-align: center; margin: 30px 0; }
+        .quotes-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .quote-box {
+            background: var(--white);
+            border: 1px solid var(--pink-light);
+            border-radius: 16px;
+            padding: 24px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .quote-text {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--text);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+        .quote-btn {
+            margin-top: 12px;
+            padding: 8px 24px;
+            border: 1.5px solid var(--pink);
+            background: transparent;
+            color: var(--pink);
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .quote-btn:hover { background: var(--pink); color: var(--white); }
+
+        /* ── Slideshow ── */
+        .slideshow-section { text-align: center; margin: 30px 0; }
+        .slideshow-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: var(--pink);
+            margin-bottom: 16px;
+        }
+        .slideshow {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 16/10;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid var(--pink-light);
+        }
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .slide.active { opacity: 1; }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .slide-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .slide-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--pink-soft);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .slide-dot.active { background: var(--pink); width: 24px; border-radius: 4px; }
+
+        /* ── Days Together ── */
+        .days-section { text-align: center; margin: 30px 0; }
+        .days-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .days-box {
+            background: var(--white);
+            border: 1px solid var(--pink-light);
+            border-radius: 16px;
+            padding: 24px;
+        }
+        .days-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+        .days-label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        .days-note {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        /* ── Wish Generator ── */
+        .wishgen-section { text-align: center; margin: 30px 0; }
+        .wishgen-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.4rem;
+            color: var(--pink);
+            margin-bottom: 14px;
+        }
+        .wishgen-card {
+            background: var(--white);
+            border: 1px solid var(--pink-light);
+            border-radius: 16px;
+            padding: 24px;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wishgen-text {
+            font-size: 0.95rem;
+            color: var(--text);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+        .wishgen-btn {
+            margin-top: 12px;
+            padding: 8px 24px;
+            border: 1.5px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .wishgen-btn:hover { background: var(--gold); color: var(--white); }
+
+        /* ── Easter Egg ── */
+        .egg-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(232,135,155,0.95);
+            z-index: 300;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeUp 0.5s ease;
+        }
+        .egg-overlay.active { display: flex; }
+        .egg-overlay .big { font-size: 4rem; margin-bottom: 10px; }
+        .egg-overlay h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        .egg-overlay p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.85);
+            font-weight: 300;
+        }
+        .egg-close {
+            margin-top: 24px;
+            padding: 10px 30px;
+            border: 2px solid var(--white);
+            background: transparent;
+            color: var(--white);
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+        .egg-close:hover { background: var(--white); color: var(--pink); }
+
         /* ── Responsive ── */
         @media (max-width: 500px) {
             .opening h1 { font-size: 1.8rem; }
@@ -828,6 +1212,8 @@
 </head>
 <body>
 
+    <div class="scroll-progress" id="scrollProgress"></div>
+
     <canvas class="fw-canvas" id="fwCanvas"></canvas>
 
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
@@ -835,6 +1221,7 @@
         <img id="lightboxImg" src="" alt="Foto">
     </div>
 
+    <button class="night-toggle" id="nightBtn" onclick="toggleNight()">&#9789;</button>
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">&#9835;</button>
 
     <div class="container">
@@ -996,6 +1383,84 @@
 
             <div class="divider"><div class="line"></div><span>&#127801;</span><div class="line"></div></div>
 
+            <!-- Slideshow -->
+            <div class="slideshow-section">
+                <div class="slideshow-title">Momen Bersama</div>
+                <div class="slideshow" id="slideshow">
+                    <div class="slide active"><img src="download.png" alt="Slide 1"></div>
+                    <div class="slide"><img src="download-1.png" alt="Slide 2"></div>
+                    <div class="slide"><img src="download-2.png" alt="Slide 3"></div>
+                </div>
+                <div class="slide-dots" id="slideDots">
+                    <div class="slide-dot active" onclick="goSlide(0)"></div>
+                    <div class="slide-dot" onclick="goSlide(1)"></div>
+                    <div class="slide-dot" onclick="goSlide(2)"></div>
+                </div>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#128149;</span><div class="line"></div></div>
+
+            <!-- Days Together -->
+            <div class="days-section">
+                <div class="days-title">Kita Sudah Bersama</div>
+                <div class="days-box">
+                    <div class="days-num" id="daysNum">0</div>
+                    <div class="days-label">hari yang indah</div>
+                    <div class="days-note">sejak hari pertama kita bersama</div>
+                </div>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#128155;</span><div class="line"></div></div>
+
+            <!-- Love Meter -->
+            <div class="meter-section">
+                <div class="meter-title">Seberapa Besar Cintaku?</div>
+                <div class="meter-bar" onclick="fillMeter()">
+                    <div class="meter-fill" id="meterFill"><span id="meterPct">0%</span></div>
+                </div>
+                <div class="meter-hint">Klik untuk mengukur</div>
+                <div class="meter-result" id="meterResult">Aku Sayang Kamu 1000% &#128152;</div>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#127752;</span><div class="line"></div></div>
+
+            <!-- Love Quotes -->
+            <div class="quotes-section">
+                <div class="quotes-title">Kata-Kata Manis</div>
+                <div class="quote-box">
+                    <div class="quote-text" id="quoteText">"Kamu adalah rumah terindah yang pernah aku temui."</div>
+                </div>
+                <button class="quote-btn" onclick="newQuote()">Kata Lainnya</button>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#127873;</span><div class="line"></div></div>
+
+            <!-- Envelope -->
+            <div class="envelope-section">
+                <div class="envelope-title">Surat Kecil Untukmu</div>
+                <div class="envelope heart-seal" id="envelope" onclick="openEnvelope()">
+                    <div class="envelope-flap"></div>
+                    <div class="envelope-body"></div>
+                    <div class="envelope-letter">
+                        <p>Wulan sayang, terima kasih sudah menjadi bagian terindah dalam hidupku. Aku berjanji akan selalu ada untukmu, dalam suka maupun duka. Semoga di usia ke-17 ini, Tuhan selalu menjaga dan memberkati setiap langkahmu. Aku sayang kamu! &#128152;</p>
+                    </div>
+                </div>
+                <div class="envelope-hint">Klik amplop untuk membuka</div>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#10024;</span><div class="line"></div></div>
+
+            <!-- Wish Generator -->
+            <div class="wishgen-section">
+                <div class="wishgen-title">Doa Untukmu</div>
+                <div class="wishgen-card">
+                    <div class="wishgen-text" id="wishgenText">Semoga di usia baru ini, setiap langkahmu dipenuhi kebahagiaan dan keberkahan.</div>
+                </div>
+                <button class="wishgen-btn" onclick="newWish()">Doa Lainnya</button>
+            </div>
+
+            <div class="divider"><div class="line"></div><span>&#128152;</span><div class="line"></div></div>
+
             <div class="signature">
                 <p>Dengan cinta,</p>
                 <p style="font-size:1.6rem;">Pacarmu &#128152;</p>
@@ -1003,6 +1468,14 @@
             </div>
 
         </div>
+    </div>
+
+    <!-- Easter Egg -->
+    <div class="egg-overlay" id="eggOverlay">
+        <div class="big">&#128152;</div>
+        <h2>Triple Click Found!</h2>
+        <p>Di hari yang spesial ini, aku ingin kamu tahu bahwa kamu adalah alasan aku tersenyum setiap hari. Aku sayang kamu, Wulan!</p>
+        <button class="egg-close" onclick="document.getElementById('eggOverlay').classList.remove('active')">Tutup</button>
     </div>
 
     <audio id="bgMusic" loop preload="auto">
@@ -1234,6 +1707,136 @@
                 setTimeout(()=>p.remove(), 14000);
             }, 800);
         }
+
+        // ── 1. Scroll Progress Bar ──
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+            document.getElementById('scrollProgress').style.width = pct + '%';
+        });
+
+        // ── 2. Click Anywhere Hearts ──
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.player-btn') || e.target.closest('.music-btn') ||
+                e.target.closest('.night-toggle') || e.target.closest('.envelope') ||
+                e.target.closest('.quote-btn') || e.target.closest('.wishgen-btn') ||
+                e.target.closest('.btn-open') || e.target.closest('.meter-bar') ||
+                e.target.closest('.tap-card') || e.target.closest('.photo-card') ||
+                e.target.closest('.cake-wrap') || e.target.closest('.slide-dot') ||
+                e.target.closest('.egg-close') || e.target.closest('.player-bar') ||
+                e.target.closest('.lightbox')) return;
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const h = document.createElement('div');
+                    h.className = 'float-heart';
+                    h.innerHTML = ['&#128152;','&#128147;','&#128156;'][Math.floor(Math.random()*3)];
+                    h.style.fontSize = (Math.random()*10+12) + 'px';
+                    h.style.left = (e.clientX + (Math.random()-0.5)*40) + 'px';
+                    h.style.top = (e.clientY + (Math.random()-0.5)*20) + 'px';
+                    h.style.animationDuration = (Math.random()*2+1.5) + 's';
+                    h.style.position = 'fixed';
+                    document.body.appendChild(h);
+                    setTimeout(()=>h.remove(), 3000);
+                }, i * 80);
+            }
+        });
+
+        // ── 3. Love Meter ──
+        let meterDone = false;
+        function fillMeter() {
+            if (meterDone) return;
+            meterDone = true;
+            const fill = document.getElementById('meterFill');
+            fill.style.width = '100%';
+            document.getElementById('meterPct').textContent = '100%';
+            setTimeout(() => {
+                document.getElementById('meterResult').classList.add('show');
+            }, 2000);
+        }
+
+        // ── 4. Envelope ──
+        function openEnvelope() {
+            document.getElementById('envelope').classList.toggle('open');
+        }
+
+        // ── 5. Love Quotes ──
+        const quotes = [
+            '"Kamu adalah rumah terindah yang pernah aku temui."',
+            '"Senyummu adalah cahaya yang menerangi hari-hariku."',
+            '"Aku tidak butuh surga, selama kamu ada di sisiku."',
+            '"Cintaku untukmu seperti bintang, selalu ada meski tak terlihat."',
+            '"Kamu adalah alasan aku percaya pada cinta."',
+            '"Di setiap tarikan nafas, aku selalu berterima kasih memiliki kamu."',
+            '"Kamu bukan hanya cintaku, kamu adalah seluruh duniaku."',
+            '"Setiap detik bersamamu adalah hadiah terindah."'
+        ];
+        let quoteIdx = 0;
+        function newQuote() {
+            quoteIdx = (quoteIdx + 1) % quotes.length;
+            document.getElementById('quoteText').textContent = quotes[quoteIdx];
+        }
+
+        // ── 6. Photo Slideshow ──
+        let slideIdx = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        function goSlide(n) {
+            slides[slideIdx].classList.remove('active');
+            dots[slideIdx].classList.remove('active');
+            slideIdx = n;
+            slides[slideIdx].classList.add('active');
+            dots[slideIdx].classList.add('active');
+        }
+        setInterval(() => {
+            goSlide((slideIdx + 1) % slides.length);
+        }, 4000);
+
+        // ── 7. Days Together ──
+        const startDate = new Date(2025, 0, 1);
+        function updateDays() {
+            const now = new Date();
+            const diff = Math.floor((now - startDate) / 864e5);
+            document.getElementById('daysNum').textContent = diff;
+        }
+        updateDays();
+
+        // ── 8. Night Mode ──
+        function toggleNight() {
+            document.body.classList.toggle('dark');
+            const btn = document.getElementById('nightBtn');
+            btn.innerHTML = document.body.classList.contains('dark') ? '&#9728;' : '&#9789;';
+        }
+
+        // ── 9. Wish Generator ──
+        const wishes = [
+            'Semoga di usia baru ini, setiap langkahmu dipenuhi kebahagiaan dan keberkahan.',
+            'Semoga Tuhan selalu menjaga dan melindungi kamu di setiap langkahmu.',
+            'Semoga semua impianmu menjadi kenyataan satu per satu.',
+            'Semoga senyummu tidak pernah pudar dan selalu bersinar cerah.',
+            'Semoga kamu selalu dikelilingi oleh orang-orang yang menyayangimu.',
+            'Semoga hidupmu selalu dipenuhi cinta, tawa, dan kebahagiaan.',
+            'Semoga kamu menjadi versi terbaik dari dirimu sendiri.',
+            'Semoga kita selalu bersama, melewati setiap suka dan duka.'
+        ];
+        let wishIdx = 0;
+        function newWish() {
+            wishIdx = (wishIdx + 1) % wishes.length;
+            document.getElementById('wishgenText').textContent = wishes[wishIdx];
+        }
+
+        // ── 10. Triple Click Easter Egg ──
+        let clickCount = 0;
+        let clickTimer;
+        document.addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 500);
+            if (clickCount >= 3) {
+                clickCount = 0;
+                document.getElementById('eggOverlay').classList.add('active');
+                launchFireworks();
+            }
+        });
     </script>
 </body>
 </html>
